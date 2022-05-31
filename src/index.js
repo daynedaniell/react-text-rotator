@@ -4,17 +4,18 @@ import Transition from "react-transition-group/Transition";
 import useRotator from "./useRotator";
 import transitions from "./transitions";
 
-const TextRotator = ({ content, time, startDelay, transitionTime }) => {
+const TextRotator = ({ content, quoteSource, time, startDelay, transitionTime }) => {
   const styles = transitions({ duration: transitionTime });
 
   const { isEntered, indexRef, currentItemContent } = useRotator({
     content,
+    quoteSource,
     transitionTime,
     startDelay,
     time,
   });
 
-  const { className = "", animation = "fade", text, link } = currentItemContent || {};
+  const { className = "", animation = "fade", text, quoteSource, link } = currentItemContent || {};
 
   return (
     <Transition in={isEntered} timeout={transitionTime}>
@@ -31,6 +32,7 @@ const TextRotator = ({ content, time, startDelay, transitionTime }) => {
         return (
           <div key={indexRef} className={className} style={style}>
             {link ? <a href={link}>{text}</a> : text}
+            {quoteSource ? {quoteSource} : ''}
           </div>
         )
 
